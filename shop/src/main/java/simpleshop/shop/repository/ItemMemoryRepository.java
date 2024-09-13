@@ -8,34 +8,35 @@ import java.util.*;
 
 @Repository
 public class ItemMemoryRepository implements ItemRepository{
-    private static final Map<UUID, Item> storage = new HashMap<>();//static
-    private static long sequence = 0L;// static
-
+    private static final Map<UUID, Item> itemStorage = new HashMap<>();//static
+    @Override
     public Item save(Item item) {
-        storage.put(item.getItemId(), item);
+        itemStorage.put(item.getItemId(), item);
         return item;
     }
-
+    @Override
     public Item findById(UUID id) {
-        return storage.get(id);
+        return itemStorage.get(id);
     }
-
+    @Override
     public List<Item> findAll() {
-        return new ArrayList<>(storage.values());
+        return new ArrayList<>(itemStorage.values());
     }
-
-    public void update(UUID itemId, Item updateParam) {
+    @Override
+    public Item update(UUID itemId, Item updateParam) {
         Item findItem = findById(itemId);
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
+        return findItem;
     }
+    @Override
     public void deleteById(UUID id) {
         Item targetItem = findById(id);
-        storage.remove(id);
+        itemStorage.remove(id);
     }
-
+    @Override
     public void clearStore() {
-        storage.clear();
+        itemStorage.clear();
     }
 }

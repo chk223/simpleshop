@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ItemServiceImpl {
+public class ItemServiceImpl implements ItemService{
 
     private final ItemRepository itemRepository;
 
@@ -19,19 +19,34 @@ public class ItemServiceImpl {
         this.itemRepository = itemRepository;
     }
 
-    Item getItemById(UUID id){
+
+    @Override
+    public Item getItemById(UUID id) {
         return itemRepository.findById(id);
     }
-    List<Item> getAllItems(){
+
+    @Override
+    public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
-    void addItem(Item item){
-        itemRepository.save(item);
+
+    @Override
+    public Item addItem(String itemName, Integer price, Integer quantity) {
+        Item item = new Item(itemName, price, quantity);
+        return itemRepository.save(item);
     }
-    void update(UUID targetId, Item item){
-        itemRepository.update(targetId, item);
+
+    @Override
+    public Item update(UUID id, Item item) {
+        Item originalItem = getItemById(id);
+        if(item.getItemName() == null) item.setItemName(originalItem.getItemName());
+        if(item.getPrice() == null) item.setPrice(originalItem.getPrice());
+        if(item.getQuantity() == null) item.setQuantity(originalItem.getQuantity());
+        return itemRepository.update(id, item);
     }
-    void deleteById(UUID id) {
+
+    @Override
+    public void deleteById(UUID id) {
         itemRepository.deleteById(id);
     }
 }

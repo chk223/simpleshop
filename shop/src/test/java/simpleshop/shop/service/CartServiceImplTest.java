@@ -30,7 +30,7 @@ class CartServiceImplTest {
     @Test
     void getCartItems() {
         //given
-        User user = new User(123L,null);
+        User user = new User("UserA","1234",null);
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
@@ -47,7 +47,7 @@ class CartServiceImplTest {
     @Test
     void addItemToCart() {
         //given
-        User user = new User(123L,null);
+        User user = new User("UserA","1234",null);
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
@@ -74,7 +74,7 @@ class CartServiceImplTest {
     @Test
     void deleteItemFromCart() {
         //given
-        User user = new User(123L,null);
+        User user = new User("UserA","1234",null);
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);

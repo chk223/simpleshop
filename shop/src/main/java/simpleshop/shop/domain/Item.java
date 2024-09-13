@@ -1,7 +1,8 @@
 package simpleshop.shop.domain;
 
-import java.util.UUID;
+import lombok.Data;
 
+import java.util.UUID;
 public class Item {
     private UUID itemId;
     private String itemName;
@@ -41,5 +42,15 @@ public class Item {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", itemName='" + itemName + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }

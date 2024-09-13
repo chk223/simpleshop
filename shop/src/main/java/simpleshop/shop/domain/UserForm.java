@@ -1,18 +1,12 @@
 package simpleshop.shop.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
-
-public class User {
+public class UserForm {
     private String userId;
     private String userPassword;
-    private Cart cart;
 
-    public User(String userId, String userPassword, Cart cart) {
+    public UserForm(String userId, String userPassword) {
         this.userId = userId;
         this.userPassword = userPassword;
-        this.cart = cart;
     }
 
     public String getUserId() {
@@ -25,13 +19,5 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }

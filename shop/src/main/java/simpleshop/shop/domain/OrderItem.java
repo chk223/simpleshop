@@ -6,6 +6,6 @@ public class OrderItem {
     private UUID id;
     private Order order;
     private Item item;
-    private int quantity;
+    private Integer quantity;
     private Double price;
 }

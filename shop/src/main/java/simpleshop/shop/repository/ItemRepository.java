@@ -9,7 +9,7 @@ public interface ItemRepository {
     public Item save(Item item);
     public Item findById(UUID id);
     public List<Item> findAll();
-    public void update(UUID itemId, Item updateParam);
+    public Item update(UUID itemId, Item updateParam);
     public void deleteById(UUID id);
     public void clearStore();
 }
