@@ -28,8 +28,6 @@ class ItemServiceTest {
         itemRepository.clearStore();
     }
 
-    private static final Map<UUID, Item> store = new HashMap<>();//static
-    private static long sequence = 0L;// static
 
     @Test
     void getItemById() {
