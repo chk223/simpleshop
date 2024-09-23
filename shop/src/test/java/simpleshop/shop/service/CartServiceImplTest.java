@@ -30,7 +30,7 @@ class CartServiceImplTest {
     @Test
     void getCartItems() {
         //given
-        User user = new User("UserA","1234",null);
+        User user = new User("UserA","1234");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
@@ -47,7 +47,7 @@ class CartServiceImplTest {
     @Test
     void addItemToCart() {
         //given
-        User user = new User("UserA","1234",null);
+        User user = new User("UserA","1234");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
@@ -65,16 +65,16 @@ class CartServiceImplTest {
         cartRepository.addItemCount(user,cartItemC);
         //then
         assertThat(userCart.getUser()).isSameAs(user);
-        assertThat(cartItemA.getId()).isEqualTo(itemA.getItemId());
+        assertThat(cartItemA.getItem().getItemId()).isEqualTo(itemA.getItemId());
         assertThat(cartItemA.getQuantity()).isEqualTo(10);
-        assertThat(cartItemB.getId()).isEqualTo(itemB.getItemId());
+        assertThat(cartItemB.getItem().getItemId()).isEqualTo(itemB.getItemId());
         assertThat(cartItemC.getQuantity()).isEqualTo(4);
     }
 
     @Test
     void deleteItemFromCart() {
         //given
-        User user = new User("UserA","1234",null);
+        User user = new User("UserA","1234");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
@@ -89,7 +89,7 @@ class CartServiceImplTest {
         //then
         assertThat(cartRepository.findUserCartItems(user).size()).isEqualTo(2);
         assertThat(cartRepository.findCartItem(user,itemA)).isNull();
-        assertThat(cartRepository.findCartItem(user,itemB).getId()).isSameAs(itemB.getItemId());
-        assertThat(cartRepository.findCartItem(user,itemC).getId()).isSameAs(itemC.getItemId());
+        assertThat(cartRepository.findCartItem(user,itemB).getItem().getItemId()).isSameAs(itemB.getItemId());
+        assertThat(cartRepository.findCartItem(user,itemC).getItem().getItemId()).isSameAs(itemC.getItemId());
     }
 }

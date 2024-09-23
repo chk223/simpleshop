@@ -1,24 +1,22 @@
-package simpleshop.shop.service;
+package simpleshop.shop.serviceimpl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import simpleshop.shop.domain.Cart;
 import simpleshop.shop.domain.CartItem;
 import simpleshop.shop.domain.Item;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.repository.CartRepository;
+import simpleshop.shop.service.CartService;
+
 import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class CartServiceImpl implements CartService{
+@RequiredArgsConstructor
+public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
-
-    @Autowired
-    public CartServiceImpl(CartRepository cartRepository) {
-        this.cartRepository = cartRepository;
-    }
 
     @Override
     public Map<UUID, CartItem> getCartItems(User user) {

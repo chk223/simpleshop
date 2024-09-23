@@ -1,11 +1,14 @@
 package simpleshop.shop.repository;
 
 import org.springframework.stereotype.Repository;
+import simpleshop.shop.domain.Grade;
+import simpleshop.shop.domain.Order;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.domain.UserForm;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Repository
 public class UserMemoryRepository implements UserRepository{
@@ -35,8 +38,20 @@ public class UserMemoryRepository implements UserRepository{
     }
 
     @Override
+    public void userGrade(String userId, Grade grade) {
+        User findUser = userStorage.get(userId);
+        findUser.setGrade(grade);
+    }
+
+    @Override
     public void deleteUser(String userId) {
         userStorage.remove(userId);
+    }
+    public void addOrder(User user, Map<UUID, Order> orders){
+        user.setOrders(orders);
+    }
+    public void removeOrder(User user, Map<UUID, Order> orders){
+        user.setOrders(orders);
     }
     public void clearStore() {
         userStorage.clear();

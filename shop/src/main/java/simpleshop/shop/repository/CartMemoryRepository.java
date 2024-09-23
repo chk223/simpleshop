@@ -27,8 +27,8 @@ public class CartMemoryRepository implements CartRepository{
 
     @Override
     public void addNewItem(User user, Item item) {
-        CartItem cartItem = new CartItem(item.getItemId(), user.getCart(), item.getQuantity()!=null? item.getQuantity() : 1);
-        cartItemStorage.put(cartItem.getId(),cartItem);
+        CartItem cartItem = new CartItem(item, user.getCart(), item.getQuantity()!=null? item.getQuantity() : 1);
+        cartItemStorage.put(cartItem.getItem().getItemId(),cartItem);
         Cart userCart = user.getCart();
         userCart.setCartItems(cartItemStorage);
         user.setCart(userCart);

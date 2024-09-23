@@ -1,7 +1,12 @@
 package simpleshop.shop.repository;
 
+import simpleshop.shop.domain.Grade;
+import simpleshop.shop.domain.Order;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.domain.UserForm;
+
+import java.util.Map;
+import java.util.UUID;
 
 public interface UserRepository {
     //회원가입
@@ -11,6 +16,9 @@ public interface UserRepository {
     //회원정보 수정
     public User updateUserInfo(String userId, UserForm userForm);
     //회원정보 삭제
+    public void userGrade(String userId, Grade grade);
     public void deleteUser(String userId);
+    public void addOrder(User user, Map<UUID, Order> orders);
+    public void removeOrder(User user, Map<UUID, Order> orders);
     public void clearStore();
 }

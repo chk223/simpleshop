@@ -3,18 +3,22 @@ package simpleshop.shop.domain;
 import java.util.UUID;
 
 public class CartItem {
-    private UUID id;
+    private Item item;
     private Cart cart;
     private Integer quantity;
 
-    public CartItem(UUID id, Cart cart, Integer quantity) {
-        this.id = id;
+    public CartItem(Item item, Cart cart, Integer quantity) {
+        this.item = item;
         this.cart = cart;
         this.quantity = quantity;
     }
 
-    public UUID getId() {
-        return id;
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Cart getCart() {

@@ -27,8 +27,8 @@ class UserServiceImplTest {
         //given
 
         //when
-        User userA = new User("UserAId", "UserApw", null);
-        User userB = new User("UserBId", "UserBpw", null);
+        User userA = new User("UserAId", "UserApw");
+        User userB = new User("UserBId", "UserBpw");
 
         //then
         User rUserA = userRepository.join(userA);
@@ -42,9 +42,9 @@ class UserServiceImplTest {
     @Test
     void findUser() {
         //given
-        User userA = new User("UserAId", "UserApw", null);
-        User userB = new User("UserBId", "UserBpw", null);
-        User userC = new User("UserCId", "UserCpw", null);
+        User userA = new User("UserAId", "UserApw");
+        User userB = new User("UserBId", "UserBpw");
+        User userC = new User("UserCId", "UserCpw");
         User rUserA = userRepository.join(userA);
         User rUserB = userRepository.join(userB);
         User rUserC = userRepository.join(userC);
@@ -64,8 +64,8 @@ class UserServiceImplTest {
     @Test
     void changeUserInfo() {
         //given
-        User userA = new User("UserAId", "UserApw", null);
-        User userB = new User("UserBId", "UserBpw", null);
+        User userA = new User("UserAId", "UserApw");
+        User userB = new User("UserBId", "UserBpw");
         User rUserA = userRepository.join(userA);
         User rUserB = userRepository.join(userB);
         //when
@@ -80,8 +80,8 @@ class UserServiceImplTest {
     @Test
     void withdraw() {
         //given
-        User userA = new User("UserAId", "UserApw", null);
-        User userB = new User("UserBId", "UserBpw", null);
+        User userA = new User("UserAId", "UserApw");
+        User userB = new User("UserBId", "UserBpw");
         User rUserA = userRepository.join(userA);
         User rUserB = userRepository.join(userB);
         //when

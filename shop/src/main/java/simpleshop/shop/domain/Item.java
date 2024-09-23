@@ -6,10 +6,10 @@ import java.util.UUID;
 public class Item {
     private UUID itemId;
     private String itemName;
-    private Integer price;
+    private double price;
     private Integer quantity;
 
-    public Item(String itemName, Integer price, Integer quantity) {
+    public Item(String itemName, double price, Integer quantity) {
         this.itemId = UUID.randomUUID();
         this.itemName = itemName;
         this.price = price;
@@ -28,11 +28,11 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public Integer getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

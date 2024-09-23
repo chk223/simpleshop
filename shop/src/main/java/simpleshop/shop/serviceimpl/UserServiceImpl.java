@@ -1,14 +1,16 @@
-package simpleshop.shop.service;
+package simpleshop.shop.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import simpleshop.shop.domain.Grade;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.domain.UserForm;
 import simpleshop.shop.repository.UserRepository;
+import simpleshop.shop.service.UserService;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User chaingeUserInfo(String userId, UserForm userForm) {
+    public User changeUserInfo(String userId, UserForm userForm) {
         User orgUser = userRepository.findUserById(userId);
         if(userForm.getUserPassword()==null) userForm.setUserPassword(orgUser.getUserPassword());
         return userRepository.updateUserInfo(userId, userForm);
@@ -32,5 +34,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public void withdraw(String userId) {
         userRepository.deleteUser(userId);
+    }
+
+    @Override
+    public void changeGrade(String userId, Grade grade) {
+
     }
 }
