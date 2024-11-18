@@ -36,13 +36,13 @@ class OrderServiceImplTest {
     void createOrder() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
+        User userA = new User("UserA", "UserApw","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cartA = new Cart(userA,cartItem);
         userRepository.join(userA);
         userA.setCart(cartA);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         //when
@@ -59,13 +59,13 @@ class OrderServiceImplTest {
     void orderDetail() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
+        User userA = new User("UserA", "UserApw","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cartA = new Cart(userA,cartItem);
         userRepository.join(userA);
         userA.setCart(cartA);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         //when
@@ -81,13 +81,13 @@ class OrderServiceImplTest {
     void userOrders() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
+        User userA = new User("UserA", "UserApw","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cartA = new Cart(userA,cartItem);
         userRepository.join(userA);
         userA.setCart(cartA);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         //when
@@ -104,8 +104,8 @@ class OrderServiceImplTest {
     void allOrders() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
-        User userB = new User("UserB", "UserBpw");
+        User userA = new User("UserA", "UserApw","userNameA");
+        User userB = new User("UserB", "UserBpw","userNameB");
         Map<UUID, CartItem> cartItemA = new HashMap<>();
         Map<UUID, CartItem> cartItemB = new HashMap<>();
         Cart cartA = new Cart(userA,cartItemA);
@@ -114,8 +114,8 @@ class OrderServiceImplTest {
         userRepository.join(userB);
         userA.setCart(cartA);
         userB.setCart(cartB);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         cartRepository.addNewItem(userB,itemA);
@@ -143,13 +143,13 @@ class OrderServiceImplTest {
     void cancelOrder() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
+        User userA = new User("UserA", "UserApw","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cartA = new Cart(userA,cartItem);
         userRepository.join(userA);
         userA.setCart(cartA);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         //when
@@ -167,13 +167,13 @@ class OrderServiceImplTest {
     void manageOrderStatus() {
         //given
         Map<UUID, Order> orders = new HashMap<>();
-        User userA = new User("UserA", "UserApw");
+        User userA = new User("UserA", "UserApw","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cartA = new Cart(userA,cartItem);
         userRepository.join(userA);
         userA.setCart(cartA);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(userA,itemA);
         cartRepository.addNewItem(userA,itemB);
         Order order = orderRepository.create(userA);

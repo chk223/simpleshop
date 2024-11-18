@@ -1,19 +1,30 @@
 package simpleshop.shop.domain;
 
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
 public class Item {
-    private UUID itemId;
+    private final UUID itemId;
     private String itemName;
+    private String imgURL;
     private double price;
     private Integer quantity;
 
-    public Item(String itemName, double price, Integer quantity) {
+    public Item(String itemName, double price, Integer quantity, String imgURL) {
         this.itemId = UUID.randomUUID();
         this.itemName = itemName;
+        this.imgURL = imgURL;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public UUID getItemId() {

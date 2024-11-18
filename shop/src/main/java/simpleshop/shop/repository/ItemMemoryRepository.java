@@ -2,7 +2,9 @@ package simpleshop.shop.repository;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import simpleshop.shop.domain.DefaultImage;
 import simpleshop.shop.domain.Item;
+import simpleshop.shop.domain.ItemForm;
 
 import java.util.*;
 
@@ -11,6 +13,9 @@ public class ItemMemoryRepository implements ItemRepository{
     private static final Map<UUID, Item> itemStorage = new HashMap<>();//static
     @Override
     public Item save(Item item) {
+        if(item.getImgURL() == null || item.getImgURL().isEmpty()) {
+            item.setImgURL(DefaultImage.ITEM.getUrl());
+        }
         itemStorage.put(item.getItemId(), item);
         return item;
     }
@@ -28,6 +33,7 @@ public class ItemMemoryRepository implements ItemRepository{
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
+        findItem.setImgURL(updateParam.getImgURL());
         return findItem;
     }
     @Override

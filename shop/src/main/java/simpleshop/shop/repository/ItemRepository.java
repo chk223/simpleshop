@@ -1,6 +1,7 @@
 package simpleshop.shop.repository;
 
 import simpleshop.shop.domain.Item;
+import simpleshop.shop.domain.ItemForm;
 
 import java.util.List;
 import java.util.UUID;

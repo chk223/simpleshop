@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import simpleshop.shop.domain.Item;
+import simpleshop.shop.domain.ItemForm;
 import simpleshop.shop.repository.ItemRepository;
 import simpleshop.shop.service.ItemService;
 
@@ -27,8 +28,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item addItem(String itemName, double price, Integer quantity) {
-        Item item = new Item(itemName, price, quantity);
+    public Item addItem(String itemName, double price, Integer quantity, String imgURL) {
+        Item item = new Item(itemName, price, quantity,imgURL);
         return itemRepository.save(item);
     }
 

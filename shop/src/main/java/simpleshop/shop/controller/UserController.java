@@ -22,7 +22,7 @@ public class UserController {
      */
     @PostMapping("/regist")
     public String regist(UserForm userForm){
-        User newUser = new User(userForm.getUserId(),userForm.getUserPassword());
+        User newUser = new User(userForm.getUserId(),userForm.getUserPassword(), userForm.getUserName());
         User user = userService.regist(newUser);
         if(user ==null) return "이미 존재하는 아이디입니다.";
         else return "회원가입 성공";

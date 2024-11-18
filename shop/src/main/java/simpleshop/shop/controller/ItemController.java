@@ -31,7 +31,7 @@ public class ItemController {
      */
     @PostMapping("/add-item")
     public void addItem(@RequestBody ItemForm itemForm) {
-        Item savedItem = itemService.addItem(itemForm.getItemName(), itemForm.getPrice(), itemForm.getQuantity());
+        Item savedItem = itemService.addItem(itemForm.getItemName(), itemForm.getPrice(), itemForm.getQuantity(), itemForm.getImgURL());
         log.info("ItemName={}, ItemPrice={}, ItemQuantity={}", savedItem.getItemName(), savedItem.getPrice(), savedItem.getQuantity());
     }
 

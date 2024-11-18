@@ -21,8 +21,6 @@ public class UserMemoryRepository implements UserRepository{
             return user;
         }
         else return null;
-        /*userStorage.put(user.getUserId(),user);
-        return user;*/
     }
 
     @Override

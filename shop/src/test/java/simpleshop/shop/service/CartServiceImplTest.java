@@ -30,12 +30,12 @@ class CartServiceImplTest {
     @Test
     void getCartItems() {
         //given
-        User user = new User("UserA","1234");
+        User user = new User("UserA","1234","userAname");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
         cartRepository.addNewItem(user,itemA);
         cartRepository.addNewItem(user, itemB);
         //when
@@ -47,13 +47,13 @@ class CartServiceImplTest {
     @Test
     void addItemToCart() {
         //given
-        User user = new User("UserA","1234");
+        User user = new User("UserA","1234","userAname");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
-        Item itemC = new Item("ItemC", 30000,3);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
+        Item itemC = new Item("ItemC", 30000,3,null);
         //when
         cartRepository.addNewItem(user,itemA);
         cartRepository.addNewItem(user, itemB);
@@ -74,13 +74,13 @@ class CartServiceImplTest {
     @Test
     void deleteItemFromCart() {
         //given
-        User user = new User("UserA","1234");
+        User user = new User("UserA","1234","userName");
         Map<UUID, CartItem> cartItem = new HashMap<>();
         Cart cart = new Cart(user, cartItem);
         user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10);
-        Item itemB = new Item("ItemB", 20000, 20);
-        Item itemC = new Item("ItemC", 30000,3);
+        Item itemA = new Item("ItemA", 10000, 10,null);
+        Item itemB = new Item("ItemB", 20000, 20,null);
+        Item itemC = new Item("ItemC", 30000,3,null);
         cartRepository.addNewItem(user,itemA);
         cartRepository.addNewItem(user, itemB);
         cartRepository.addNewItem(user,itemC);

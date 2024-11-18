@@ -1,6 +1,7 @@
 package simpleshop.shop.service;
 
 import simpleshop.shop.domain.Item;
+import simpleshop.shop.domain.ItemForm;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +11,7 @@ public interface ItemService {
     Item getItemById(UUID id);
     List<Item> getAllItems();
     //등록
-    Item addItem(String itemName, double price, Integer quantity);
+    Item addItem(String itemName, double price, Integer quantity, String imgURL);
     //수정
     Item update(UUID id, Item item);
     //삭제
