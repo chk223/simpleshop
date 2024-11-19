@@ -32,16 +32,10 @@ public class UserViewController {
     public String regist(@ModelAttribute UserForm userForm){
         log.info("userId={}, userPassword={}, userName= {}",userForm.getUserId(),userForm.getUserPassword(),userForm.getUserName());
         //가입된 아이디가 아니라면
-        if(userService.findUser(userForm.getUserId()) == null) {
-            User newUser = new User(userForm.getUserId(),userForm.getUserPassword(), userForm.getUserName());
-            userService.regist(newUser);
-            log.info("회원 가입 성공!"); // 나중에 모달로 띄워주기.
-            return "redirect:/";
-        }
-        else {
-            System.out.println("이미 존재하는 아이디입니다.");
-            return "redirect:/regist";
-        }
+        User newUser = new User(userForm.getUserId(),userForm.getUserPassword(), userForm.getUserName());
+        userService.regist(newUser);
+        log.info("회원 가입 성공!"); // 나중에 모달로 띄워주기.
+        return "redirect:/";
     }
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -53,14 +47,9 @@ public class UserViewController {
     public String login(@ModelAttribute UserForm userForm, HttpSession  session) {
 //        log.info("userId={}, userPassword={}",userForm.getUserId(), userForm.getUserPassword());
         User user = userService.login(userForm.getUserId(),userForm.getUserPassword());
-        if(user != null) {
-            session.setAttribute("user", user);
-            log.info("로그인 성공!");
-            return "redirect:/";
-        }
-        else {
-            return "redirect:/login";
-        }
+        session.setAttribute("user", user);
+        log.info("로그인 성공!");
+        return "redirect:/";
     }
    @GetMapping("/logout")
     public String logout(HttpSession  session) {

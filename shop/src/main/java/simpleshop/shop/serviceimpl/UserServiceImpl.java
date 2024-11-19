@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import simpleshop.shop.domain.Grade;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.domain.UserForm;
+import simpleshop.shop.exception.user.UserAlreadyExistException;
+import simpleshop.shop.exception.user.UserNotFoundException;
 import simpleshop.shop.repository.UserRepository;
 import simpleshop.shop.service.UserService;
 
@@ -16,12 +18,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User regist(User user) {
-        return userRepository.join(user);
+        if(userRepository.findUserById(user.getUserId()) != null) {
+            throw new UserAlreadyExistException(user.getUserId()+"는 이미 존재하는 아이디입니다.");
+        }
+        userRepository.join(user);
+        return user;
     }
 
     @Override
     public User findUser(String userId) {
-        return userRepository.findUserById(userId);
+        User user = userRepository.findUserById(userId);
+        if(user == null) {
+            throw new UserNotFoundException(userId+"를 갖는 유저가 없습니다.");
+        }
+        return user;
     }
 
     @Override
@@ -43,19 +53,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String userId, String userPassword) {
-        //아이디, 비밀번호 검증
-        if(userId == null || userId.trim().isEmpty() ||
-        userPassword == null || userPassword.trim().isEmpty()) {
-            return null;
-        }
-        //유저 검색 검증
         User findUser = userRepository.findUserById(userId);
-        if(findUser != null) {
-            if(findUser.getUserPassword().equals(userPassword)) {
-                return findUser;
-            }
+        //아이디, 비밀번호 검증
+        if(findUser == null) {
+            throw new UserNotFoundException("없는 ID입니다.");
         }
-        return null;
+        if(userId == null || userId.trim().isEmpty() ||
+        userPassword == null || userPassword.trim().isEmpty()
+        ||!findUser.getUserPassword().equals(userPassword)) {
+            throw new UserNotFoundException("비밀전호 또는 아이디가 잘못되었습니다.");
+        }
+        return findUser;
     }
 
 }
