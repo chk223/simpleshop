@@ -40,4 +40,22 @@ public class UserServiceImpl implements UserService {
     public void changeGrade(String userId, Grade grade) {
 
     }
+
+    @Override
+    public User login(String userId, String userPassword) {
+        //아이디, 비밀번호 검증
+        if(userId == null || userId.trim().isEmpty() ||
+        userPassword == null || userPassword.trim().isEmpty()) {
+            return null;
+        }
+        //유저 검색 검증
+        User findUser = userRepository.findUserById(userId);
+        if(findUser != null) {
+            if(findUser.getUserPassword().equals(userPassword)) {
+                return findUser;
+            }
+        }
+        return null;
+    }
+
 }

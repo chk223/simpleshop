@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import simpleshop.shop.domain.Item;
 import simpleshop.shop.domain.ItemForm;
+import simpleshop.shop.domain.User;
 import simpleshop.shop.service.ItemService;
 import java.util.List;
 import java.util.UUID;
@@ -15,23 +16,12 @@ import java.util.UUID;
 @RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
+@SessionAttributes("user")
 public class ItemViewController {
     private final ItemService itemService;
-
-
     /**
      * 상품 조회
      */
-    @GetMapping()
-    public String home(Model model) {
-        List<Item> items = itemService.getAllItems();
-        model.addAttribute("items", items);
-//        System.out.println(items);
-        return "getItem";
-    }
-//    public List<Item> allItems() {
-//        return itemService.getAllItems();
-//    }
 
     @GetMapping("/add-item")
     public String addItemForm(Model model) {
@@ -53,15 +43,18 @@ public class ItemViewController {
      */
     @GetMapping("/update-item/{id}")
     public String updateItemForm(@PathVariable("id") UUID itemId, Model model) {
-        log.info("itemId={}",itemId);
-        Item item = itemService.getItemById(itemId);
-        if(item != null) {
-            model.addAttribute("item", item);
-            return "updateItem";
+        User user = (User) model.getAttribute("user");
+        if (user != null) {
+            Item item = itemService.getItemById(itemId);
+            if(item != null) {
+                model.addAttribute("item", item);
+                return "updateItem";
+            }
+            else {
+                return "redirect:/";
+            }
         }
-        else {
-            return "redirect:/";
-        }
+        else return "redirect:/";
     }
     @PostMapping("/update-item/{id}")
     public String updateItem(@PathVariable("id") UUID itemId, @ModelAttribute Item itemForm) {

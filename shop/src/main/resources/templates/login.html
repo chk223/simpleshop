@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>로그인</title>
 </head>
 <body>
-    <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Example label</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
-    </div>
-    <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Another label</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-    </div>
+<!-- 헤더 포함 -->
+<header th:replace="fragments/header :: header"></header>
+<h1>로그인</h1>
+<div class="input_box">
+    <form th:action="@{/login}" method="post" th:object="${LoginForm}">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="userId">아이디</span>
+            <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력하세요.">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="userPassword">비밀번호</span>
+            <input type="text" th:field="*{userPassword}" class="form-control" placeholder="비밀번호를 입력하세요.">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+        <a href="/regist" type="button" class="btn btn-primary">회원가입</a>
+    </form>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

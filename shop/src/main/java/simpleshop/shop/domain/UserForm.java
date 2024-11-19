@@ -11,6 +11,17 @@ public class UserForm {
         this.userName = userName;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public UserForm() {
+    }
+
     public UserForm(String userId, String userPassword) {
         this.userId = userId;
         this.userPassword = userPassword;

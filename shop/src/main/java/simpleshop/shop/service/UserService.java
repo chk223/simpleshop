@@ -10,4 +10,5 @@ public interface UserService {
     public User changeUserInfo(String userId, UserForm userForm);
     public void withdraw(String userId);
     public void changeGrade(String userId, Grade grade);
+    public User login(String userId, String userPassword);
 }
