@@ -11,7 +11,7 @@ import simpleshop.shop.domain.UserForm;
 import simpleshop.shop.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user_api")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {

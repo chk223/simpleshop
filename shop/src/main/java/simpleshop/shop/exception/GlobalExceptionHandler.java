@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResponseStatusException.class)
     public String handleUnauthorizedException(ResponseStatusException ex, Model model) {
         model.addAttribute("error", ex.getMessage());
-        return "redirect:/login"; // 로그인 페이지로 이동
+        return "redirect:/user/login"; // 로그인 페이지로 이동
     }
     /**커스텀 예외 발생 시 실행*/
     @ExceptionHandler(CustomException.class)

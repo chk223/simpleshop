@@ -13,9 +13,10 @@
   </style>
 </head>
 <body>
+<div th:insert="~{fragments/header :: header}"></div>
 <h1>상품 수정</h1>
 <div class="input_box">
-  <form th:action="@{/update-item/{id}(id=${item.itemId})}" method="post" th:object="${item}">
+  <form th:action="@{/item/update-item/{id}(id=${item.itemId})}" method="post" th:object="${item}">
     <!-- 상품 이름 -->
     <div class="input-group mb-3">
       <span class="input-group-text" id="itemName">상품 이름</span>

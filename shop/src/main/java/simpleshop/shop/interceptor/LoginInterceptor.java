@@ -22,13 +22,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);//기존 세션 가져오기
         User user = (session != null) ? (User) session.getAttribute("user") : null;
         // 회원가입, 로그인 요청은 Interceptor 제외
-        if ((uri.equals("/login") && (method.equalsIgnoreCase("GET") || method.equalsIgnoreCase("POST")))
-                || uri.equals("/regist")) {
+        if ((uri.equals("/user/login") && (method.equalsIgnoreCase("GET") || method.equalsIgnoreCase("POST")))
+                || uri.equals("/user/regist")) {
             return true;// 요청 허용 -> 컨트롤러로 이동
         }
         if (user == null) {// 세션에 "user"가 없으면 로그인 페이지로 리다이렉트
             log.info("세션이 없음: 로그인 페이지 리다이렉트했음.");
-            response.sendRedirect("/login");
+            response.sendRedirect("/user/login");
             return false; // 요청 차단 -> 컨트롤러로 이동하지 않음
         }
         log.info("세션이 있음! userId={}", user.getUserId());

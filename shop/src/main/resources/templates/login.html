@@ -12,7 +12,7 @@
 <div th:insert="~{fragments/header :: header}"></div>
 <h1>로그인</h1>
 <div class="input_box">
-    <form th:action="@{/login}" method="post" th:object="${loginForm}">
+    <form th:action="@{/user/login}" method="post" th:object="${loginForm}">
         <div class="input-group mb-3">
             <span class="input-group-text">아이디</span>
             <input type="text" id="userId" th:field="*{userId}" class="form-control"
@@ -39,7 +39,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
-        <a href="/regist" type="button" class="btn btn-primary">회원가입</a>
+        <a href="/user/regist" type="button" class="btn btn-primary">회원가입</a>
     </form>
 
 </div>

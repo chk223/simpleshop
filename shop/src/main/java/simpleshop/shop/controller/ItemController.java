@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/item_api")
 @RequiredArgsConstructor
 @Slf4j
 public class ItemController {

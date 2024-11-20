@@ -20,7 +20,7 @@ import simpleshop.shop.service.UserService;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserViewController {
@@ -34,7 +34,8 @@ public class UserViewController {
         return "addUser";
     }
     @PostMapping("/regist")
-    public String regist(@ModelAttribute @Valid UserForm userForm, BindingResult bindingResult,  HttpSession session){        if (bindingResult.hasErrors()) {
+    public String regist(@ModelAttribute @Valid UserForm userForm, BindingResult bindingResult,  HttpSession session){
+        if (bindingResult.hasErrors()) {
             return "addUser"; // 검증 실패 시 다시 폼으로 돌아감
         }
 //        log.info("userId={}, userPassword={}, userName= {}",userForm.getUserId(),userForm.getUserPassword(),userForm.getUserName());
@@ -74,8 +75,8 @@ public class UserViewController {
         }
         catch (UserNotFoundException e) {
 //            log.info("로그인 실패: " +e.getMessage());
-            bindingResult.reject("login.failed", e.getMessage());
-            model.addAttribute("loginFailed", e.getMessage());
+            bindingResult.reject("login.failed", e.getMessage());//bindingResult에 오류 등록 -> thymeleaf를 통해 참조
+            model.addAttribute("loginFailed", e.getMessage());//model에 오류 메시지 담아서 전달
             return "login";
         }
 
@@ -86,7 +87,7 @@ public class UserViewController {
            session.invalidate();//세션 무효화
            log.info("로그아웃 완료");
        }
-       return "redirect:/login";
+       return "redirect:/user/login";
    }
 
 }

@@ -25,8 +25,8 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a th:if="${user != null}" href="../logout" type="button" class="btn btn-danger">로그아웃</a>
-                    <a th:if="${user == null}" href="../login" type="button" class="btn btn-primary">로그인</a>
+                    <a th:if="${user != null}" href="../user/logout" type="button" class="btn btn-danger">로그아웃</a>
+                    <a th:if="${user == null}" href="../user/login" type="button" class="btn btn-primary">로그인</a>
                 </li>
             </div>
         </div>

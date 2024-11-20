@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changeGrade(String userId, Grade grade) {
-
+        userRepository.userGrade(userId,grade);
     }
 
     @Override

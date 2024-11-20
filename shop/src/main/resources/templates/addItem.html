@@ -10,10 +10,10 @@
 </head>
 <body>
     <!-- 헤더 포함 -->
-    <header th:replace="fragments/header :: header"></header>
+    <div th:insert="~{fragments/header :: header}"></div>
     <h1>상품 등록</h1>
     <div class="input_box">
-        <form th:action="@{/add-item}" method="post" th:object="${itemFrom}">
+        <form th:action="@{/item/add-item}" method="post" th:object="${itemFrom}">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="itemName">상품 이름</span>
                 <input type="text" name="itemName" th:value="${itemName}" class="form-control" placeholder="상품 이름을 입력하세요.">

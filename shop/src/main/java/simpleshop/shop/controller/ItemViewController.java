@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/item")
 @RequiredArgsConstructor
 @Slf4j
 @SessionAttributes("user")
@@ -63,7 +63,7 @@ public class ItemViewController {
             return "redirect:/";
         }
         else {
-            return "redirect:/update-item" + itemId;
+            return "redirect:/item/update-item" + itemId;
         }
     }
 
