@@ -15,16 +15,28 @@
 <div class="input_box">
     <form th:action="@{/regist}" method="post" th:object="${userForm}">
         <div class="input-group mb-3">
-            <span class="input-group-text" id="userId">아이디</span>
-            <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력하세요.">
+            <span class="input-group-text">아이디</span>
+            <input type="text" id="userId" th:field="*{userId}" class="form-control"
+                   th:classappend="${#fields.hasErrors('userId') ? 'is-invalid':''}" placeholder="아이디를 입력하세요.">
+            <div th:if="${#fields.hasErrors('userId')}" class="invalid-feedback">
+                <span th:errors="*{userId}"></span>
+            </div>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="userPassword">비밀번호</span>
-            <input type="text" th:field="*{userPassword}" class="form-control" placeholder="비밀번호를 입력하세요.">
+            <input type="text" th:field="*{userPassword}" class="form-control"
+                   th:classappend="${#fields.hasErrors('userPassword') ? ' is-invalid' : ''}" placeholder="비밀번호를 입력하세요.">
+            <div th:if="${#fields.hasErrors('userPassword')}" class="invalid-feedback">
+                <span th:errors="*{userPassword}"></span>
+            </div>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text" id="userName">닉네임</span>
-            <input type="text" th:field="*{userName}" class="form-control" placeholder="닉네임을 입력하세요.">
+            <input type="text" th:field="*{userName}" class="form-control"
+                   th:classappend="${#fields.hasErrors('userName') ? ' is-invalid' : ''}" placeholder="닉네임을 입력하세요.">
+            <div th:if="${#fields.hasErrors('userName')}" class="invalid-feedback">
+                <span th:errors="*{userName}"></span>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">등록</button>
     </form>

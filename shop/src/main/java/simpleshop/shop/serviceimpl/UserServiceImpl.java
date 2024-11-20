@@ -1,6 +1,7 @@
 package simpleshop.shop.serviceimpl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import simpleshop.shop.domain.Grade;
 import simpleshop.shop.domain.User;
@@ -10,6 +11,7 @@ import simpleshop.shop.exception.user.UserNotFoundException;
 import simpleshop.shop.repository.UserRepository;
 import simpleshop.shop.service.UserService;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -53,16 +55,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String userId, String userPassword) {
+//        log.info("서비스 로직 로그인 시도: userId={}, userPassword={}", userId,userPassword);
+        // 입력 값 검증
+        if (userId == null || userId.trim().isEmpty()) {
+            throw new UserNotFoundException("아이디를 입력해주세요.");
+        }
+        if (userPassword == null || userPassword.trim().isEmpty()) {
+            throw new UserNotFoundException("비밀번호를 입력해주세요.");
+        }
         User findUser = userRepository.findUserById(userId);
         //아이디, 비밀번호 검증
         if(findUser == null) {
+//            log.warn("아이디 없음. userId={}", userId);
             throw new UserNotFoundException("없는 ID입니다.");
         }
-        if(userId == null || userId.trim().isEmpty() ||
-        userPassword == null || userPassword.trim().isEmpty()
-        ||!findUser.getUserPassword().equals(userPassword)) {
-            throw new UserNotFoundException("비밀전호 또는 아이디가 잘못되었습니다.");
+        if(!findUser.getUserPassword().equals(userPassword)) {
+//            log.warn("비밀번호 틀림. userId={}", userId);
+            throw new UserNotFoundException("비밀전호가 잘못되었습니다.");
         }
+//        log.info("로그인 성공: userId={}", userId);
         return findUser;
     }
 
