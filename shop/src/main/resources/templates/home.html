@@ -14,7 +14,7 @@
 <div th:if="${user != null}">
   <p>환영합니다, <span th:text="${user.userName}"></span>님!</p>
 </div>
-<button th:onclick="'window.location.href=\'/item/add-item\''"  type="button" class="btn btn-primary">상품 등록</button>
+<button th:if="${user != null and user.grade == T(simpleshop.shop.domain.Grade).SELLER}" th:onclick="'window.location.href=\'/item/add-item\''"  type="button" class="btn btn-primary">상품 등록</button>
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div th:each="item: ${items}" class="col">
     <div class="card h-100">
@@ -25,9 +25,9 @@
         <p th:text="수량은+${item.quantity}+개" class="card-text">상품 수량</p>
       </div>
       <div class="card-footer">
-        <a th:href="@{/item/update-item/{id}(id=${item.itemId})}" class="btn btn-success">수정</a>
+        <a th:if="${user != null and user.grade == T(simpleshop.shop.domain.Grade).SELLER}" th:href="@{/item/update-item/{id}(id=${item.itemId})}" class="btn btn-success">수정</a>
         <form th:action="@{/item/delete-item/{id}(id=${item.itemId})}" method="post">
-          <button type="submit" class="btn btn-danger" name="_method" value="DELETE">삭제</button>
+          <button th:if="${user != null and user.grade == T(simpleshop.shop.domain.Grade).SELLER}" type="submit" class="btn btn-danger" name="_method" value="DELETE">삭제</button>
         </form>
       </div>
     </div>
