@@ -1,22 +1,41 @@
 package simpleshop.shop.domain;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
 public class Item {
     private final UUID itemId;
+    @NotBlank(message = "상품 이름은 공백이 포함될 수 없습니다.")
+    @Size(max=20,message = "상품 이름은 20자 이내여야 합니다.")
     private String itemName;
     private String imgURL;
+    @NumberFormat
+    @NotBlank(message = "가격은 공백이 포함될 수 없습니다.")
     private double price;
+    @NumberFormat
+    @NotBlank(message = "수량은 공백이 포함될 수 없습니다.")
     private Integer quantity;
+    private String description;
 
-    public Item(String itemName, double price, Integer quantity, String imgURL) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Item(String itemName, double price, Integer quantity, String imgURL, String description) {
         this.itemId = UUID.randomUUID();
         this.itemName = itemName;
         this.imgURL = imgURL;
         this.price = price;
         this.quantity = quantity;
+        this.description = description;
     }
 
     public String getImgURL() {

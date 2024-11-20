@@ -33,7 +33,11 @@ public class ItemMemoryRepository implements ItemRepository{
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
-        findItem.setImgURL(updateParam.getImgURL());
+        if(updateParam.getImgURL() == null || updateParam.getImgURL().isEmpty()) {
+            updateParam.setImgURL(DefaultImage.ITEM.getUrl());
+        }
+        else findItem.setImgURL(updateParam.getImgURL());
+        findItem.setDescription(updateParam.getDescription());
         return findItem;
     }
     @Override

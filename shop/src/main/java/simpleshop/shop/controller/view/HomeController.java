@@ -1,4 +1,4 @@
-package simpleshop.shop.controller;
+package simpleshop.shop.controller.view;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

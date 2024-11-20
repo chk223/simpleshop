@@ -1,6 +1,5 @@
-package simpleshop.shop.controller;
+package simpleshop.shop.controller.view;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

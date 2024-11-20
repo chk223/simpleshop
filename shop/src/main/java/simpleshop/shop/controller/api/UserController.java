@@ -1,4 +1,4 @@
-package simpleshop.shop.controller;
+package simpleshop.shop.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

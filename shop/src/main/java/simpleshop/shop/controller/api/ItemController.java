@@ -1,4 +1,4 @@
-package simpleshop.shop.controller;
+package simpleshop.shop.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +31,7 @@ public class ItemController {
      */
     @PostMapping("/add-item")
     public void addItem(@RequestBody ItemForm itemForm) {
-        Item savedItem = itemService.addItem(itemForm.getItemName(), itemForm.getPrice(), itemForm.getQuantity(), itemForm.getImgURL());
+        Item savedItem = itemService.addItem(itemForm.getItemName(), itemForm.getPrice(), itemForm.getQuantity(), itemForm.getImgURL(), itemForm.getDescription());
         log.info("ItemName={}, ItemPrice={}, ItemQuantity={}", savedItem.getItemName(), savedItem.getPrice(), savedItem.getQuantity());
     }
 

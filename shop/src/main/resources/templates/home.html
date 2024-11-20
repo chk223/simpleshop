@@ -25,6 +25,7 @@
         <p th:text="수량은+${item.quantity}+개" class="card-text">상품 수량</p>
       </div>
       <div class="card-footer">
+        <a th:href="@{/item/item-detail/{id}(id=${item.itemId})}" type="button" class="btn btn-primary">상세정보</a>
         <a th:if="${user != null and user.grade == T(simpleshop.shop.domain.Grade).SELLER}" th:href="@{/item/update-item/{id}(id=${item.itemId})}" class="btn btn-success">수정</a>
         <form th:action="@{/item/delete-item/{id}(id=${item.itemId})}" method="post">
           <button th:if="${user != null and user.grade == T(simpleshop.shop.domain.Grade).SELLER}" type="submit" class="btn btn-danger" name="_method" value="DELETE">삭제</button>

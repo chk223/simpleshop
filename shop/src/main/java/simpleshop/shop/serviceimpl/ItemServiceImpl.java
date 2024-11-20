@@ -28,8 +28,8 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item addItem(String itemName, double price, Integer quantity, String imgURL) {
-        Item item = new Item(itemName, price, quantity,imgURL);
+    public Item addItem(String itemName, double price, Integer quantity, String imgURL, String description) {
+        Item item = new Item(itemName, price, quantity,imgURL, description);
         return itemRepository.save(item);
     }
 
@@ -39,6 +39,7 @@ public class ItemServiceImpl implements ItemService {
         if(item.getItemName() == null) item.setItemName(originalItem.getItemName());
         if(item.getPrice() == 0) item.setPrice(originalItem.getPrice());
         if(item.getQuantity() == null) item.setQuantity(originalItem.getQuantity());
+        if(item.getDescription() == null) item.setDescription(originalItem.getDescription());
         return itemRepository.update(id, item);
     }
 

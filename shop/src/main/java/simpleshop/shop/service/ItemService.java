@@ -11,7 +11,7 @@ public interface ItemService {
     Item getItemById(UUID id);
     List<Item> getAllItems();
     //등록
-    Item addItem(String itemName, double price, Integer quantity, String imgURL);
+    Item addItem(String itemName, double price, Integer quantity, String imgURL, String description);
     //수정
     Item update(UUID id, Item item);
     //삭제
