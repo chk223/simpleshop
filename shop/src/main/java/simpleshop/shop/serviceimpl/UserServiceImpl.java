@@ -8,6 +8,7 @@ import simpleshop.shop.domain.User;
 import simpleshop.shop.domain.UserForm;
 import simpleshop.shop.exception.user.UserAlreadyExistException;
 import simpleshop.shop.exception.user.UserNotFoundException;
+import simpleshop.shop.repository.CartRepository;
 import simpleshop.shop.repository.UserRepository;
 import simpleshop.shop.service.UserService;
 
@@ -17,6 +18,7 @@ import simpleshop.shop.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final CartRepository cartRepository;
 
     @Override
     public User regist(User user) {

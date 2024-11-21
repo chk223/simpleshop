@@ -1,5 +1,6 @@
 package simpleshop.shop.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -8,10 +9,10 @@ public class Cart {
     private User user;
     private Map<UUID,CartItem> cartItems;
 
-    public Cart(User user, Map<UUID,CartItem> cartItems) {
+    public Cart(User user) {
         this.id = UUID.randomUUID();
         this.user = user;
-        this.cartItems = cartItems;
+        this.cartItems = new HashMap<>();
     }
 
     public UUID getId() {

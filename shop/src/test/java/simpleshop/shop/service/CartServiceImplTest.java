@@ -9,14 +9,12 @@ import simpleshop.shop.domain.CartItem;
 import simpleshop.shop.domain.Item;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.repository.CartRepository;
-import simpleshop.shop.repository.ItemRepository;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class CartServiceImplTest {
     @Autowired
@@ -31,13 +29,11 @@ class CartServiceImplTest {
     void getCartItems() {
         //given
         User user = new User("UserA","1234","userAname");
-        Map<UUID, CartItem> cartItem = new HashMap<>();
-        Cart cart = new Cart(user, cartItem);
-        user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10,null);
-        Item itemB = new Item("ItemB", 20000, 20,null);
-        cartRepository.addNewItem(user,itemA);
-        cartRepository.addNewItem(user, itemB);
+        Cart cart = new Cart(user);
+        Item itemA = new Item("ItemA", 10000, 10,null,"hi");
+        Item itemB = new Item("ItemB", 20000, 20,null,"hi");
+        cartRepository.addItem(user,itemA);
+        cartRepository.addItem(user, itemB);
         //when
         Map<UUID, CartItem> userCartItems = cartRepository.findUserCartItems(user);
         //then
@@ -48,48 +44,40 @@ class CartServiceImplTest {
     void addItemToCart() {
         //given
         User user = new User("UserA","1234","userAname");
-        Map<UUID, CartItem> cartItem = new HashMap<>();
-        Cart cart = new Cart(user, cartItem);
-        user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10,null);
-        Item itemB = new Item("ItemB", 20000, 20,null);
-        Item itemC = new Item("ItemC", 30000,3,null);
+        Cart cart = new Cart(user);
+        Item itemA = new Item("ItemA", 10000, 10,null,"hi");
+        Item itemB = new Item("ItemB", 20000, 20,null,"hi");
+        Item itemC = new Item("ItemC", 30000,3,null,"hi");
         //when
-        cartRepository.addNewItem(user,itemA);
-        cartRepository.addNewItem(user, itemB);
-        cartRepository.addNewItem(user,itemC);
-        Cart userCart = cartRepository.findUserCart(user);
-        CartItem cartItemA = cartRepository.findCartItem(user, itemA);
-        CartItem cartItemB = cartRepository.findCartItem(user, itemB);
-        CartItem cartItemC = cartRepository.findCartItem(user, itemC);
-        cartRepository.addItemCount(user,cartItemC);
+        cartRepository.addItem(user,itemA);
+        cartRepository.addItem(user, itemB);
+        cartRepository.addItem(user,itemC);
+        Map<UUID, CartItem> userCartItems = cartRepository.findUserCartItems(user);
+        cartRepository.addItem(user,itemA);
         //then
-        assertThat(userCart.getUser()).isSameAs(user);
-        assertThat(cartItemA.getItem().getItemId()).isEqualTo(itemA.getItemId());
-        assertThat(cartItemA.getQuantity()).isEqualTo(10);
-        assertThat(cartItemB.getItem().getItemId()).isEqualTo(itemB.getItemId());
-        assertThat(cartItemC.getQuantity()).isEqualTo(4);
+        assertThat(userCartItems.get(itemA.getItemId())).isNotNull();
+        assertThat(userCartItems.get(itemA.getItemId()).getQuantity()).isEqualTo(2);
+        assertThat(userCartItems.get(itemB.getItemId()).getQuantity()).isEqualTo(1);
     }
 
     @Test
     void deleteItemFromCart() {
         //given
-        User user = new User("UserA","1234","userName");
-        Map<UUID, CartItem> cartItem = new HashMap<>();
-        Cart cart = new Cart(user, cartItem);
-        user.setCart(cart);
-        Item itemA = new Item("ItemA", 10000, 10,null);
-        Item itemB = new Item("ItemB", 20000, 20,null);
-        Item itemC = new Item("ItemC", 30000,3,null);
-        cartRepository.addNewItem(user,itemA);
-        cartRepository.addNewItem(user, itemB);
-        cartRepository.addNewItem(user,itemC);
+        User user = new User("UserA","1234","userAname");
+        Cart cart = new Cart(user);
+        Item itemA = new Item("ItemA", 10000, 10,null,"hi");
+        Item itemB = new Item("ItemB", 20000, 20,null,"hi");
+        Item itemC = new Item("ItemC", 30000,3,null,"hi");
         //when
+        cartRepository.addItem(user,itemA);
+        cartRepository.addItem(user,itemA);
+        cartRepository.addItem(user, itemB);
+        cartRepository.addItem(user,itemC);
+        Map<UUID, CartItem> userCartItems = cartRepository.findUserCartItems(user);
         cartRepository.deleteItem(user,itemA);
         //then
-        assertThat(cartRepository.findUserCartItems(user).size()).isEqualTo(2);
-        assertThat(cartRepository.findCartItem(user,itemA)).isNull();
-        assertThat(cartRepository.findCartItem(user,itemB).getItem().getItemId()).isSameAs(itemB.getItemId());
-        assertThat(cartRepository.findCartItem(user,itemC).getItem().getItemId()).isSameAs(itemC.getItemId());
+        assertThat(userCartItems.get(itemA.getItemId())).isNotNull();
+        assertThat(userCartItems.get(itemA.getItemId()).getQuantity()).isEqualTo(1);
+        assertThat(userCartItems.get(itemB.getItemId()).getQuantity()).isEqualTo(1);
     }
 }

@@ -18,7 +18,7 @@ public interface UserRepository {
     //회원정보 삭제
     public void userGrade(String userId, Grade grade);
     public void deleteUser(String userId);
-    public void addOrder(User user, Map<UUID, Order> orders);
-    public void removeOrder(User user, Map<UUID, Order> orders);
+    public void addOrder(User user, UUID orderId);
+    public void removeOrder(User user,  UUID orderId);
     public void clearStore();
 }

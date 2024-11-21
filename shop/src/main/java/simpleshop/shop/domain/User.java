@@ -2,6 +2,8 @@ package simpleshop.shop.domain;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,19 +18,17 @@ public class User {
     @NotBlank(message = "닉네임은 공백이 포함될 수 없습니다.")
     @Size(max=10,message = "닉네임은 10자 이내여야 합니다.")
     private String userName;
-    private Cart cart;
     private Grade grade;
     //orderId, order
-    private Map<UUID, Order> orders;
+    private List<UUID> orders;
 
     public User(String userId, String userPassword, String userName) {
         this.id = UUID.randomUUID();
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
-        this.cart = null;
         this.grade = Grade.BASIC;
-        this.orders = null;
+        this.orders = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -43,13 +43,18 @@ public class User {
         this.userName = userName;
     }
 
-    public Map<UUID, Order> getOrders() {
+    public List<UUID> getOrders() {
         return orders;
     }
 
-    public void setOrders(Map<UUID, Order> orders) {
-        this.orders = orders;
+    public void addOrder(UUID orderId) {
+        this.orders.add(orderId);
     }
+
+    public void removeOrder(UUID orderId) {
+        this.orders.removeIf(order -> order.equals(orderId));
+    }
+
 
     public Grade getGrade() {
         return grade;
@@ -69,13 +74,5 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }

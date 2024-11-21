@@ -45,11 +45,11 @@ public class UserMemoryRepository implements UserRepository{
     public void deleteUser(String userId) {
         userStorage.remove(userId);
     }
-    public void addOrder(User user, Map<UUID, Order> orders){
-        user.setOrders(orders);
+    public void addOrder(User user, UUID orderId){
+        user.addOrder(orderId);
     }
-    public void removeOrder(User user, Map<UUID, Order> orders){
-        user.setOrders(orders);
+    public void removeOrder(User user, UUID orderId){
+        user.removeOrder(orderId);
     }
     public void clearStore() {
         userStorage.clear();

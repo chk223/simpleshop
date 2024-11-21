@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import simpleshop.shop.discount.DiscountPolicy;
 import simpleshop.shop.domain.*;
+import simpleshop.shop.repository.CartRepository;
 import simpleshop.shop.repository.OrderRepository;
 import simpleshop.shop.repository.UserRepository;
 import simpleshop.shop.service.OrderService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,19 +19,19 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final DiscountPolicy discountPolicy;
+    private final CartRepository cartRepository;
 
     @Override
     public void createOrder(User user) {
-        Map<UUID, Order> orders = user.getOrders();
-        Order order = orderRepository.create(user);
-        orders.put(order.getId(),order);
-        userRepository.addOrder(user,orders);
+        List<UUID> orders = user.getOrders();
+        Map<UUID, CartItem> cartItems = cartRepository.findUserCartItems(user);
+        Order order = orderRepository.create(user,cartItems);
+        userRepository.addOrder(user,order.getId());
     }
 
     @Override
-    public OrderItem orderDetail(UUID orderId) {
-        Order order = orderRepository.getOrderById(orderId);
-        return new OrderItem(order.getId(), order.getOrderItems(), order.getStatus(),order.getOrderDate(),order.getTotalAmount());
+    public Order orderDetail(UUID orderId) {
+        return orderRepository.getOrderById(orderId);
     }
 
     @Override
@@ -48,19 +50,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void cancelOrder(UUID orderId) {
-        Order order = orderRepository.getOrderById(orderId);
-        User user = order.getUser();
-        Map<UUID, Order> orders = user.getOrders();
-        orders.remove(orderId);
-        userRepository.addOrder(user, orders);
+    public void cancelOrder(User user, UUID orderId) {
+        userRepository.removeOrder(user, orderId);
         orderRepository.cancel(orderId);
     }
 
     @Override
-    public void manageOrderStatus(UUID orderId, OrderStatus status) {
-        Order order = orderRepository.getOrderById(orderId);
-        orderRepository.statusManagement(order, status);
+    public void changeOrderStatus(UUID orderId, OrderStatus status) {
+        orderRepository.statusManagement(orderId, status);
     }
 
     @Override

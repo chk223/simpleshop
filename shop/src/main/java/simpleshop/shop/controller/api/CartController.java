@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/cart-api")
 @RequiredArgsConstructor
 @Slf4j
 public class CartController {

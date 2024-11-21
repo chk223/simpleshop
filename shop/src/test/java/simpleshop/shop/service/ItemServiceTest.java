@@ -32,7 +32,7 @@ class ItemServiceTest {
     @Test
     void getItemById() {
         //given
-        Item item = new Item("ItemA", 100, 10,null);
+        Item item = new Item("ItemA", 100, 10,null,"");
         //when
         Item savedItem = itemRepository.save(item);
         //then
@@ -45,8 +45,8 @@ class ItemServiceTest {
     @Test
     void getAllItems() {
         //given
-        Item itemA = new Item("itemA", 100, 1,null);
-        Item itemB = new Item("itemB", 200, 2,null);
+        Item itemA = new Item("itemA", 100, 1,null,"");
+        Item itemB = new Item("itemB", 200, 2,null,"");
         itemRepository.save(itemA);
         itemRepository.save(itemB);
         //when
@@ -59,7 +59,7 @@ class ItemServiceTest {
     @Test
     void addItem() {
         //given
-        Item item = new Item("ItemA",100, 10,null);
+        Item item = new Item("ItemA",100, 10,null,"");
         //when
         Item savedItem = itemRepository.save(item);
         //then
@@ -70,11 +70,11 @@ class ItemServiceTest {
     @Test
     void update() {
         //given
-        Item item = new Item("ItemA", 100, 10,null);
+        Item item = new Item("ItemA", 100, 10,null,"");
         Item savedItem = itemRepository.save(item);
         UUID itemId = savedItem.getItemId();
         //when
-        Item updateParam = new Item("ItemB", 200, 20,null);
+        Item updateParam = new Item("ItemB", 200, 20,null,"");
         itemRepository.update(itemId,updateParam);
         //then
         Item modifiedItem = itemRepository.findById(itemId);
@@ -86,8 +86,8 @@ class ItemServiceTest {
     @Test
     void deleteById() {
         //given
-        Item itemA = new Item("itemA", 100, 1,null);
-        Item itemB = new Item("itemB", 200, 2,null);
+        Item itemA = new Item("itemA", 100, 1,null,"");
+        Item itemB = new Item("itemB", 200, 2,null,"");
         Item savedItemA = itemRepository.save(itemA);
         itemRepository.save(itemB);
         //when
