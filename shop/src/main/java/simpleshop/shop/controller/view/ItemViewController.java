@@ -25,8 +25,11 @@ public class ItemViewController {
 
     @GetMapping("/add-item")
     public String addItemForm(Model model) {
-        model.addAttribute("itemForm", new ItemForm());
-        return "addItem";  // addItem.html 페이지로 이동
+        User user = (User)model.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("itemForm", new ItemForm());
+            return "addItem";
+        } else return "redirect:/";
     }
 
     /**
@@ -44,7 +47,7 @@ public class ItemViewController {
      */
     @GetMapping("/update-item/{id}")
     public String updateItemForm(@PathVariable("id") UUID itemId, Model model) {
-        User user = (User) model.getAttribute("user");
+        User user = (User)model.getAttribute("user");
         if (user != null) {
             Item item = itemService.getItemById(itemId);
             if (item != null) {
@@ -77,8 +80,8 @@ public class ItemViewController {
     }
 
     @GetMapping("/item-detail/{id}")
-    public String itemDetailForm(@PathVariable("id") UUID itemId, HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
+    public String itemDetailForm(@PathVariable("id") UUID itemId, Model model) {
+        User user = (User)model.getAttribute("user");
         log.info("itemId={}",itemId);
         Item item = itemService.getItemById(itemId);
         model.addAttribute("item", item);
@@ -86,11 +89,10 @@ public class ItemViewController {
         return "itemDetail";
     }
 
-//    @PostMapping("/add-cart")
-//    public String addCart(@ModelAttribute Item item, HttpSession session){
-//        User user = (User) session.getAttribute("user");
-//        Cart cart = user.getCart();
-//
-//        return "redirect:/";
-//    }
+    @RequestMapping(value = "/item-detail/{id}", method = RequestMethod.POST)
+    public String itemDetail(@PathVariable("id") UUID itemId) {
+
+        return "";
+    }
+
 }

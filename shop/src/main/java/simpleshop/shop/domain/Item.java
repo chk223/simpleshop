@@ -1,6 +1,7 @@
 package simpleshop.shop.domain;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
@@ -14,10 +15,10 @@ public class Item {
     private String itemName;
     private String imgURL;
     @NumberFormat
-    @NotBlank(message = "가격은 공백이 포함될 수 없습니다.")
+    @PositiveOrZero(message = "가격은 0 이상이어야 합니다.")
     private double price;
     @NumberFormat
-    @NotBlank(message = "수량은 공백이 포함될 수 없습니다.")
+    @PositiveOrZero(message = "수량은 0 이상이어야 합니다.")
     private Integer quantity;
     private String description;
 

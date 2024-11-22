@@ -34,14 +34,12 @@ public class CartController {
     @PostMapping("/add-cart")
     public void addCart(String userId, UUID itemId) {
         User user = userService.findUser(userId);
-        Item item = itemService.getItemById(itemId);
-        cartService.addItemToCart(user, item);
+        cartService.addItemToCart(user, itemId);
     }
     //수정(삭제)
     @PostMapping("/delete-cart-item")
     public void deleteCartItem(String userId, UUID itemId) {
         User user = userService.findUser(userId);
-        Item item = itemService.getItemById(itemId);
-        cartService.deleteItemFromCart(user, item);
+        cartService.deleteItemFromCart(user, itemId);
     }
 }

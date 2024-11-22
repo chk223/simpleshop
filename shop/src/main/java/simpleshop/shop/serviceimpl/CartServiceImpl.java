@@ -6,6 +6,7 @@ import simpleshop.shop.domain.CartItem;
 import simpleshop.shop.domain.Item;
 import simpleshop.shop.domain.User;
 import simpleshop.shop.repository.CartRepository;
+import simpleshop.shop.repository.ItemRepository;
 import simpleshop.shop.service.CartService;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final ItemRepository itemRepository;
 
     @Override
     public Map<UUID, CartItem> getCartItems(User user) {
@@ -24,12 +26,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addItemToCart(User user, Item item) {
+    public void addItemToCart(User user, UUID itemId) {
+        Item item = itemRepository.findById(itemId);
         cartRepository.addItem(user,item);
     }
 
     @Override
-    public void deleteItemFromCart(User user, Item item) {
+    public void deleteItemFromCart(User user, UUID itemId) {
+        Item item = itemRepository.findById(itemId);
         cartRepository.deleteItem(user,item);
     }
 }

@@ -1,7 +1,8 @@
 <div th:fragment="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../">홈</a>
+            <a class="navbar-brand" href="/">홈</a>
+            <a th:if="${user != null}" href="/cart/cart-items" type="button" class="btn btn-primary">장바구니</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -25,9 +26,9 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <li class="nav-item">
-                    <a th:if="${user != null}" href="../user/logout" type="button" class="btn btn-danger">로그아웃</a>
-                    <a th:if="${user == null}" href="../user/login" type="button" class="btn btn-primary">로그인</a>
-                    <a th:if="${user != null}" href="../user/user-detail" type="button" class="btn btn-primary">내정보</a>
+                    <a th:if="${user != null}" href="/user/logout" type="button" class="btn btn-danger">로그아웃</a>
+                    <a th:if="${user == null}" href="/user/login" type="button" class="btn btn-primary">로그인</a>
+                    <a th:if="${user != null}" href="/user/user-detail" type="button" class="btn btn-primary">내정보</a>
                 </li>
             </div>
         </div>

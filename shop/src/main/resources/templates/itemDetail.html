@@ -12,7 +12,7 @@
 <!--헤더 적용-->
 <div th:insert="~{fragments/header :: header}"></div>
 <div class="input_box">
-  <form action="/item/add-cart" method="POST" th:object="${item}">
+  <form th:action="@{/cart/add-cart/{id}(id=${item.itemId})}" method="POST" th:object="${item}">
     <h1 th:text="'상품 이름: '+${item.itemName}">상품 이름</h1>
     <div>
       <img th:src="${item.imgURL}" class="card-img-top" th:alt="${item.itemName}" alt="상품 이미지">

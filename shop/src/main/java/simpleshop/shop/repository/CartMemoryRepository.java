@@ -36,10 +36,14 @@ public class CartMemoryRepository implements CartRepository{
         }
         else {
             cartItem.decreaseQuantity();
-            if(cartItem.getQuantity() == 0) {
+//            log.info("Repository: cartItem={} 의 남은개수 ={}", cartItem.getItem().getItemName(),cartItem.getQuantity());
+            if(cartItem.getQuantity() <= 0) {
+//                log.info("cartItem={}을 지울거임.", cartItem.getItem().getItemName());
                 cart.remove(item.getItemId());
             }
-            cart.put(item.getItemId(), cartItem);
+            else{
+                cart.put(item.getItemId(), cartItem);
+            }
             cartItemStorage.put(user.getId(),cart);
         }
     }

@@ -1,9 +1,6 @@
 package simpleshop.shop.domain;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -13,15 +10,13 @@ public class ItemForm {
     @Size(max=20,message = "상품 이름은 20자 이내여야 합니다.")
     private String itemName;
     private String imgURL;
-    @NumberFormat
     @Max(1000000)
     @Min(1000)
-    @NotBlank(message = "가격은 공백이 포함될 수 없습니다.")
+    @PositiveOrZero(message = "가격은 0 이상이어야 합니다.")
     private double price;
-    @NumberFormat
     @Min(0)
     @Max(10000)
-    @NotBlank(message = "수량은 공백이 포함될 수 없습니다.")
+    @PositiveOrZero(message = "수량은 0 이상이어야 합니다.")
     private Integer quantity;
     private String description;
 

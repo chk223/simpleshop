@@ -19,8 +19,8 @@ import java.util.List;
 public class HomeController {
     private final ItemService itemService;
     @GetMapping()
-    public String home(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
+    public String home(Model model) {
+        User user = (User)model.getAttribute("user");
         List<Item> items = itemService.getAllItems();
         model.addAttribute("items", items);
         model.addAttribute("user",user);
